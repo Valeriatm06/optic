@@ -1,0 +1,14 @@
+# Build
+target/
+dist/
+node_modules/
+
+# SonarQube tooling
+tools/*.jar
+reports/
+.scannerwork/
+.sonar/
+
+# IDE
+.idea/
+*.iml
