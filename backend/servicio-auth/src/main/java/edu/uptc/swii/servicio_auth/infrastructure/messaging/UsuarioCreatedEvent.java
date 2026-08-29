@@ -7,8 +7,8 @@ public class UsuarioCreatedEvent {
     private String password;
     private String rol;
 
-    // Constructor vacío obligatorio para que Jackson pueda deserializar
     public UsuarioCreatedEvent() {
+        // Constructor vacío obligatorio para que Jackson pueda deserializar el evento
     }
 
     // Getters y Setters (o usa Lombok @Data si lo tienes)

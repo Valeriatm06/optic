@@ -28,9 +28,13 @@ public class CitaKafkaConsumer {
             JsonNode root = objectMapper.readTree(eventJson);
 
             // Extracción elástica de campos (evita NullPointerException)
-            JsonNode idNode = root.get("id") != null ? root.get("id") :
-                    root.get("appointmentId") != null ? root.get("appointmentId") :
-                            root.get("citaId");
+            JsonNode idNode = root.get("id");
+            if (idNode == null) {
+                idNode = root.get("appointmentId");
+            }
+            if (idNode == null) {
+                idNode = root.get("citaId");
+            }
 
             JsonNode patientNode = root.get("patientId") != null ? root.get("patientId") :
                     root.get("pacienteId");

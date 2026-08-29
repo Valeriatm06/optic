@@ -21,7 +21,7 @@ public class PacienteController {
     private final PacienteService pacienteService;
 
     @PostMapping
-    public ResponseEntity<?> createPatient(@Valid @RequestBody PacienteRequestDTO request) {
+    public ResponseEntity<Object> createPatient(@Valid @RequestBody PacienteRequestDTO request) {
         try {
             Paciente paciente = toDomain(request);
             Paciente creado = pacienteService.crearPaciente(paciente);
@@ -33,7 +33,7 @@ public class PacienteController {
     }
 
     @GetMapping("/{patientId}")
-    public ResponseEntity<?> getPatient(@PathVariable String patientId) {
+    public ResponseEntity<Object> getPatient(@PathVariable String patientId) {
         try {
             Paciente paciente = pacienteService.obtenerPacientePorId(patientId)
                     .orElseThrow(() -> new RuntimeException("Paciente no encontrado"));
@@ -44,7 +44,7 @@ public class PacienteController {
     }
 
     @GetMapping("/documento/{documento}")
-    public ResponseEntity<?> getPatientByDocumento(@PathVariable String documento) {
+    public ResponseEntity<Object> getPatientByDocumento(@PathVariable String documento) {
         try {
             Paciente paciente = pacienteService.obtenerPacientePorDocumento(documento)
                     .orElseThrow(() -> new RuntimeException("Paciente no encontrado"));
@@ -55,7 +55,7 @@ public class PacienteController {
     }
 
     @PutMapping("/{patientId}")
-    public ResponseEntity<?> updatePatient(@PathVariable String patientId, @RequestBody PacienteRequestDTO request) {
+    public ResponseEntity<Object> updatePatient(@PathVariable String patientId, @RequestBody PacienteRequestDTO request) {
         try {
             Paciente paciente = toDomain(request);
             Paciente actualizado = pacienteService.actualizarPaciente(patientId, paciente);
@@ -66,7 +66,7 @@ public class PacienteController {
     }
 
     @DeleteMapping("/{patientId}")
-    public ResponseEntity<?> deletePatient(@PathVariable String patientId) {
+    public ResponseEntity<Object> deletePatient(@PathVariable String patientId) {
         try {
             pacienteService.eliminarPaciente(patientId);
             return ResponseEntity.ok(new ApiResponse(patientId, "Paciente eliminado"));
@@ -76,7 +76,7 @@ public class PacienteController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllPatients(
+    public ResponseEntity<Object> getAllPatients(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int limit) {
         
